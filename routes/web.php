@@ -1,17 +1,19 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LandingPageController;
 
-Route::get('/', function () {
-    return Inertia::render('Landing', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
+// Route::get('/', function () {
+//     return Inertia::render('Landing', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
         
-    ]);
-});
+//     ]);
+// });
+Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

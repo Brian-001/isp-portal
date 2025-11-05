@@ -1,71 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "@inertiajs/react";
 import * as Icons from "../Components/Icons";
-import { motion, useAnimation, AnimatePresence } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
 
-/* ────────────────────── Animated Section ────────────────────── */
-const AnimatedSection = ({ children, className = "" }) => {
-  const controls = useAnimation();
-  const [ref, inView] = useInView({ threshold: 0.2, triggerOnce: true });
+// Import Refactored Logic, Data, and Components
+import AnimatedSection from "../Components/AnimatedSection";
+import useTheme from "../Hooks/useTheme";
+import { packages, testimonials, coverage } from "../Data/landingData";
 
-  useEffect(() => {
-    if (inView) controls.start("visible");
-  }, [controls, inView]);
-
-  return (
-    <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={controls}
-      variants={{
-        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-        hidden: { opacity: 0, y: 50 }
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-};
 
 export default function Landing() {
-  const [theme, setTheme] = useState("light");
+  const { theme, toggleTheme } = useTheme(); // 💡 Hook refactor
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  /* ────────────────────── Data ────────────────────── */
-  const packages = [
-    { name: "5 Mbps", price: "Ksh 1,000", description: "Perfect for browsing, email & light streaming", speed: "5 Mbps" },
-    { name: "10 Mbps", price: "Ksh 1,500", description: "Great for HD streaming & video calls", speed: "10 Mbps", popular: true },
-    { name: "20 Mbps", price: "Ksh 2,000", description: "Ideal for multiple devices & 4K streaming", speed: "20 Mbps" },
-    { name: "40 Mbps", price: "Ksh 3,800", description: "Ultra‑fast for heavy use & small offices", speed: "40 Mbps" },
-  ];
-  const testimonials = [
-    { name: "Amina, Kileleshwa", quote: "Reliable speeds and quick support. Never had downtime!" },
-    { name: "James, South B", quote: "M‑Pesa payments are effortless. Best ISP in Nairobi!" },
-    { name: "Sarah, Westlands", quote: "Setup was done in 2 hours. Super professional team." },
-  ];
-  const coverage = ["Santon", "Kamute‑ini", "Hunters", "Kwa Mafuta"];
+  
+  // 💡 Data refactor: Moved the arrays to landingData.js
   const services = [
     { title: "Fiber Internet", icon: <Icons.FiberIcon />, description: "Blazing fast fiber for homes & businesses" },
     { title: "Onsite Support", icon: <Icons.SupportIcon />, description: "Same day technician visits" },
     { title: "Device Sales", icon: <Icons.RouterIcon />, description: "Premium routers & mesh systems" },
   ];
-
-  /* ────────────────────── Theme Handling ────────────────────── */
-  useEffect(() => {
-    const saved = localStorage.getItem("theme") || "light";
-    setTheme(saved);
-    document.documentElement.classList.toggle("dark", saved === "dark");
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("dark");
-  };
 
   /* ────────────────────── Render ────────────────────── */
   return (
@@ -75,13 +29,13 @@ export default function Landing() {
           "min-h-screen transition-colors duration-300",
           theme === "dark"
             ? "dark bg-slate-950 text-slate-100"
-            : "bg-white text-slate-800"               // Pure white background
+            : "bg-white text-slate-800"
         )}
       >
         {/* ───── Header ───── */}
         <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white dark:bg-slate-900/90 border-b border-gray-200 dark:border-slate-800">
           <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            {/* Logo */}
+            {/* ... (Header content remains the same) */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -131,6 +85,7 @@ export default function Landing() {
         </header>
 
         {/* ───── Mobile Menu ───── */}
+        {/* ... (Mobile menu content remains the same) */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
@@ -158,8 +113,9 @@ export default function Landing() {
             </motion.div>
           )}
         </AnimatePresence>
-
+        
         {/* ───── Hero ───── */}
+        {/* ... (Hero content remains the same) */}
         <section className="pt-28 pb-16 px-6">
           <div className="max-w-7xl mx-auto text-center">
             <motion.h1
@@ -233,6 +189,7 @@ export default function Landing() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {packages.map((pkg) => (
                 <AnimatedSection key={pkg.name}>
+                  {/* ... (Package card JSX remains the same) */}
                   <motion.div
                     whileHover={{ y: -8 }}
                     className={clsx(
@@ -272,6 +229,7 @@ export default function Landing() {
             <div className="grid md:grid-cols-3 gap-6">
               {testimonials.map((t) => (
                 <AnimatedSection key={t.name}>
+                  {/* ... (Testimonial card JSX remains the same) */}
                   <motion.div
                     whileHover={{ scale: 1.02 }}
                     className="rounded-2xl p-6 shadow-md border border-gray-200 dark:border-slate-700"
@@ -323,6 +281,7 @@ export default function Landing() {
             <div className="grid md:grid-cols-3 gap-8">
               {services.map((s) => (
                 <AnimatedSection key={s.title}>
+                  {/* ... (Service card JSX remains the same) */}
                   <motion.div
                     whileHover={{ y: -4 }}
                     className="text-center  rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-slate-700"
@@ -338,6 +297,7 @@ export default function Landing() {
         </section>
 
         {/* ───── CTA ───── */}
+        {/* ... (CTA and Footer remain the same) */}
         <section className="py-20 bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-700 dark:to-cyan-700 text-white">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <motion.h2
