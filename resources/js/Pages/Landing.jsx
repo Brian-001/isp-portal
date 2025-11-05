@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "@inertiajs/react";
-import MoonIcon  from "../Components/Icons/MoonIcon";
-import SunIcon  from "../Components/Icons/SunIcon";
-import MenuIcon  from "../Components/Icons/MenuIcon";
-import CloseIcon  from "../Components/Icons/CloseIcon";
-import FiberIcon  from "../Components/Icons/FiberIcon";
-import SupportIcon  from "../Components/Icons/SupportIcon";
-import RouterIcon  from "../Components/Icons/RouterIcon";
+import * as Icons from "../Components/Icons";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import clsx from "clsx";
@@ -54,9 +48,9 @@ export default function Landing() {
   ];
   const coverage = ["Santon", "Kamute‑ini", "Hunters", "Kwa Mafuta"];
   const services = [
-    { title: "Fiber Internet", icon: <FiberIcon />, description: "Blazing fast fiber for homes & businesses" },
-    { title: "Onsite Support", icon: <SupportIcon />, description: "Same day technician visits" },
-    { title: "Device Sales", icon: <RouterIcon />, description: "Premium routers & mesh systems" },
+    { title: "Fiber Internet", icon: <Icons.FiberIcon />, description: "Blazing fast fiber for homes & businesses" },
+    { title: "Onsite Support", icon: <Icons.SupportIcon />, description: "Same day technician visits" },
+    { title: "Device Sales", icon: <Icons.RouterIcon />, description: "Premium routers & mesh systems" },
   ];
 
   /* ────────────────────── Theme Handling ────────────────────── */
@@ -122,7 +116,7 @@ export default function Landing() {
                 className="text-white ml-4 p-2.5 rounded-lg  hover:bg-gray-200 dark:hover:bg-slate-700 transition"
                 aria-label="Toggle theme"
               >
-                {theme === "light" ? <MoonIcon /> : <SunIcon />}
+                {theme === "light" ? <Icons.MoonIcon /> : <Icons.SunIcon />}
               </button>
             </nav>
 
@@ -131,7 +125,7 @@ export default function Landing() {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden p-2 text-white rounded-lg transition"
             >
-              {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+              {mobileMenuOpen ? <Icons.CloseIcon /> : <Icons.MenuIcon />}
             </button>
           </div>
         </header>
@@ -157,7 +151,7 @@ export default function Landing() {
                   onClick={toggleTheme}
                   className="text-white flex items-center gap-3 py-3 border-b border-gray-200 dark:border-slate-800"
                 >
-                  {theme === "light" ? <MoonIcon /> : <SunIcon />}
+                  {theme === "light" ? <Icons.MoonIcon /> : <Icons.SunIcon />}
                   <span>{theme === "light" ? "Dark Mode" : "Light Mode"}</span>
                 </button>
               </nav>
