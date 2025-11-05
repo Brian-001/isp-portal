@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
@@ -9,9 +10,6 @@ class LandingPageController extends Controller
     //
     public function index()
     {
-        return inertia('Landing', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
-        ]);
+        return Inertia::render('Landing');
     }
 }
