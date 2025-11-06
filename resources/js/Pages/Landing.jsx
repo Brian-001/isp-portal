@@ -331,7 +331,7 @@ export default function Landing() {
         <footer className="bg-gray-100 dark:bg-black text-gray-600 dark:text-slate-400 py-12">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <p className="text-sm">
-              © {new Date().getFullYear()} Villah Rich Networks — Nairobi, Kenya
+             All Rights Reserved © {new Date().getFullYear()} Villah Rich Networks — Nairobi, Kenya
             </p>
             <p className="mt-2 text-xs">
               Licensed by CAK • Fiber‑Powered • Local & Proud
